@@ -15,6 +15,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.kubraboduroglu.projects.earthquakes.service.EarthquakesService;
 
+import reactor.core.publisher.Mono;
+
 @RestController
 @RequestMapping("/EarthquakesApi")
 public class EarthquakesController {
@@ -26,16 +28,16 @@ public class EarthquakesController {
 	private static final String USGS_URL = "https://earthquake.usgs.gov/fdsnws/event/1/";
 	
 	Map<String, String> paramMap = new HashMap<>();
-	
+		
 	@GetMapping("/getVersionNo")
 	public ResponseEntity<String> getVersionNo() {
 		String versionNo = restTemplate.getForObject(USGS_URL + "version", String.class);
 		return new ResponseEntity<String>(versionNo, HttpStatus.OK);
 	}
 	
-	@GetMapping("/getCountv1")
-	public ResponseEntity<String> getCountv1(String startTime, String endTime){
-		String count = earthquakesService.getCountv1(startTime, endTime);
+	@GetMapping("/getCountObject")
+	public ResponseEntity<String> getCountObject(String startTime, String endTime){
+		String count = earthquakesService.getCountObject(startTime, endTime);
 		return new ResponseEntity<>(count, HttpStatus.OK);
 	}
 	
@@ -43,10 +45,16 @@ public class EarthquakesController {
 	 * @param startTime
 	 * @return
 	 */
-	@GetMapping("/getCountv2")
-	public ResponseEntity<String> getCountv2(String startTime, String endTime){
+	@GetMapping("/getCountEntity")
+	public ResponseEntity<String> getCountEntity(String startTime, String endTime){
 		
-		ResponseEntity<String> count = earthquakesService.getCountv2(startTime,endTime);
+		ResponseEntity<String> count = earthquakesService.getCountEntity(startTime,endTime);
+		return count;
+	}
+	
+	@GetMapping("/getCountWithWebClient")
+	public Mono<String> getCountWithWebClient(String startTime, String endTime){
+		Mono<String> count = earthquakesService.getCountWithWebClient(startTime,endTime);
 		return count;
 	}
 	

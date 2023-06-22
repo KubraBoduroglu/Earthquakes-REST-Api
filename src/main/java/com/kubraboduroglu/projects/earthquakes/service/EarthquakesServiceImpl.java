@@ -5,6 +5,9 @@ import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
+
+import reactor.core.publisher.Mono;
 
 public class EarthquakesServiceImpl implements EarthquakesService{
 
@@ -13,7 +16,12 @@ public class EarthquakesServiceImpl implements EarthquakesService{
 	
 	Map<String, String> paramMap = new HashMap<>();
 	
-	public String getCountv1(String startTime, String endTime) {
+	//WebClient client = WebClient.create();
+	WebClient webClient = WebClient.builder()
+		    .baseUrl(USGS_URL)
+		    .build();
+	
+	public String getCountObject(String startTime, String endTime) {
 		paramMap.put("starttime", startTime);
 		paramMap.put("endtime", endTime);
 		
@@ -23,7 +31,7 @@ public class EarthquakesServiceImpl implements EarthquakesService{
 		return count;
 	}
 	
-	public ResponseEntity<String> getCountv2(String startTime, String endTime) {
+	public ResponseEntity<String> getCountEntity(String startTime, String endTime) {
 		
 		paramMap.put("starttime", startTime);
 		paramMap.put("endtime", endTime);
@@ -33,4 +41,15 @@ public class EarthquakesServiceImpl implements EarthquakesService{
 		ResponseEntity<String> count = restTemplate.getForEntity(countUrl, String.class, paramMap);
 		return count;
 	}
+
+	@Override
+	public Mono<String> getCountWithWebClient(String startTime, String endTime) {
+		Mono<String> result = webClient.get()
+				.uri(USGS_URL, paramMap)
+				.retrieve()
+				.bodyToMono(String.class);
+		return result;
+	}
+	
+	
 }
