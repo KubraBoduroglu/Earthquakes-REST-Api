@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import com.kubraboduroglu.projects.earthquakes.dto.UsgsQueryDto;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.kubraboduroglu.projects.earthquakes.dto.UsgsQueryReqDTO;
+import com.kubraboduroglu.projects.earthquakes.dto.UsgsResponseDTO;
 import com.kubraboduroglu.projects.earthquakes.service.UsgsClientService;
 
 import reactor.core.publisher.Mono;
@@ -47,10 +50,6 @@ public class UsgsClientController {
 		return new ResponseEntity<>(count, HttpStatus.OK);
 	}
 	
-	/**
-	 * @param startTime
-	 * @return
-	 */
 	@GetMapping("/getCountEntity")
 	public ResponseEntity<String> getCountEntity(String startTime, String endTime){
 		
@@ -73,13 +72,18 @@ public class UsgsClientController {
 	}
 	
 	@GetMapping("/getUsgsData/v2")
-	public ResponseEntity<String> getUsgsData(@RequestBody UsgsQueryDto usgsQueryDto){
-		String startTime = usgsQueryDto.getStarttime();
-		String endTime = usgsQueryDto.getEndtime();	
-		Integer minMagnitude = usgsQueryDto.getMinmagnitude();
-		usgsData = earthquakesService.getUsgsData(startTime,endTime, minMagnitude);
+	public ResponseEntity<UsgsResponseDTO> getUsgsDatav2(@RequestBody UsgsQueryReqDTO usgsQueryReqDto) throws JsonMappingException, JsonProcessingException{
+		/*
+		String startTime = usgsQueryReqDto.getStarttime();
+		String endTime = usgsQueryReqDto.getEndtime();	
+		Integer minMagnitude = usgsQueryReqDto.getMinmagnitude();
+		usgsData = earthquakesService.getUsgsDatav2(startTime,endTime, minMagnitude);
+		*/
+		ResponseEntity<UsgsResponseDTO> usgsData;
+		UsgsResponseDTO[] usgsResponseDTO;
+		usgsResponseDTO = earthquakesService.getUsgsDatav2(usgsQueryReqDto);
 		
-		return new ResponseEntity<>(usgsData, HttpStatus.OK);
+		return new ResponseEntity<>(usgsResponseDTO, HttpStatus.OK);
 	}
 	
 }

@@ -1,13 +1,13 @@
 package com.kubraboduroglu.projects.earthquakes.dto;
 
-public class UsgsQueryDto {
+public class UsgsQueryReqDTO {
 	
-	String starttime;
-	String endtime;
-	Integer minmagnitude;
-	Integer maxmagnitude;
+	private String starttime;
+	private String endtime;
+	private Integer minmagnitude;
+	private Integer maxmagnitude;
 	
-	public UsgsQueryDto(String starttime, String endtime, Integer minmagnitude, Integer maxmagnitude) {
+	public UsgsQueryReqDTO(String starttime, String endtime, Integer minmagnitude, Integer maxmagnitude) {
 		super();
 		this.starttime = starttime;
 		this.endtime = endtime;
@@ -15,7 +15,7 @@ public class UsgsQueryDto {
 		this.maxmagnitude = maxmagnitude;
 	}
 
-	public UsgsQueryDto() {
+	public UsgsQueryReqDTO() {
 		super();
 	}
 
