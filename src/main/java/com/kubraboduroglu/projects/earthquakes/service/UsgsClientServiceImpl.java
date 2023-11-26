@@ -114,7 +114,7 @@ public class UsgsClientServiceImpl implements UsgsClientService{
 		//ObjectMapper mapper = new ObjectMapper();
 		//usgsData = mapper.readValue(USGS_QUERY_URL, ParameterizedTypeReference<List<E>>);
 		//usgsResponseData = mapper.readValue(USGS_QUERY_URL, UsgsResponseDTO.class);
-		//usgsResponseData.usgsResponseData.getBody()
+		//usgsResponseData.usgsResponseData.getBody();
 		
 		
 	}

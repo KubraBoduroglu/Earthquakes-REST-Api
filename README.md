@@ -1,9 +1,8 @@
 ## FUTURE WORKS ROADMAP
 
 In no specific order:  
-* connect to db  
-* more client methods, crud methods  
-* exception handler  
+* crud methods with db integration  
+* exception handling   
 * authentication  
 * dockerize the application  
 * connect more than 1 api  
