@@ -2,6 +2,7 @@ package com.kubraboduroglu.projects.earthquakes.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,7 @@ public class UsgsClientController {
 		return count;
 	}
 	
-	// not working for now, research more about synchronous call with WebClient and reactive programming
-	//can try feign client too
+	// TODO can try feign client too
 	@GetMapping("/getCountWithWebClient")
 	public ResponseEntity<ResponseEntity<String>> getCountWithWebClient(String startTime, String endTime, Integer minMagnitude){
 		ResponseEntity<String> count = earthquakesService.getCountWithWebClient(startTime,endTime);
@@ -66,24 +66,18 @@ public class UsgsClientController {
 	}
 	
 	@GetMapping("/getUsgsData/v1")
-	public ResponseEntity<String> getUsgsData(@RequestParam String startTime, @RequestParam String endTime, @RequestParam Integer minMagnitude){
-		usgsData = earthquakesService.getUsgsData(startTime,endTime, minMagnitude);
-		return new ResponseEntity<>(usgsData, HttpStatus.OK);		
+	public ResponseEntity<String> getUsgsData(@RequestParam String startTime, @RequestParam String endTime, @RequestParam Double minMagnitude){
+		ResponseEntity<String> usgsData = earthquakesService.getUsgsData(startTime,endTime, minMagnitude);
+		return usgsData;	
 	}
 	
-	@GetMapping("/getUsgsData/v2")
-	public ResponseEntity<UsgsResponseDTO> getUsgsDatav2(@RequestBody UsgsQueryReqDTO usgsQueryReqDto) throws JsonMappingException, JsonProcessingException{
-		/*
-		String startTime = usgsQueryReqDto.getStarttime();
-		String endTime = usgsQueryReqDto.getEndtime();	
-		Integer minMagnitude = usgsQueryReqDto.getMinmagnitude();
-		usgsData = earthquakesService.getUsgsDatav2(startTime,endTime, minMagnitude);
-		*/
-		ResponseEntity<UsgsResponseDTO> usgsData;
-		UsgsResponseDTO[] usgsResponseDTO;
-		usgsResponseDTO = earthquakesService.getUsgsDatav2(usgsQueryReqDto);
-		
-		return new ResponseEntity<>(usgsResponseDTO, HttpStatus.OK);
-	}
+	 @GetMapping("/getUsgsData/v2")
+	 // TODO can try with List<Features> 
+	public UsgsResponseDTO getUsgsDatav2(@RequestParam String startTime, @RequestParam String endTime, @RequestParam Double minMagnitude) {
+		UsgsResponseDTO usgsResponseDTO = earthquakesService.getUsgsDatav2(startTime,endTime, minMagnitude);
+		return usgsResponseDTO;
+	} 
+	
+	// post with @RequestBody UsgsQueryReqDTO usgsQueryReqDto
 	
 }
