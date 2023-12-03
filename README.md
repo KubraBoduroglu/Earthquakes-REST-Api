@@ -19,17 +19,17 @@ You can reach the OpenApi page by `http://localhost:8080/swagger-ui/index.html` 
 ## Technologies
 
 ---
-- Java 17
-- Spring Boot 3.0
-- Open API Documentation
+- Java 17  
+- Spring Boot 3.0  
+- Open API Documentation  
 - Spring Data JPA
-- H2 In Memory Database
-- Restful API
+[]( - H2 In Memory Database)  
+- Restful API  
 - Maven
-- Junit5
-- Mockito
+[]( - Junit5)  
+[]( - Mockito)
 - Docker
-- Github Actions
+[]( - Github Actions)  
 
 
 ## Prerequisites
@@ -58,10 +58,12 @@ You can reach the swagger-ui via  `http://{HOST}:8080/swagger-ui.html`
 ## FUTURE WORKS ROADMAP
 
 In no specific order:  
-* crud methods with db integration  
+* crud methods with db integration with H2 and PostgreSQL  
 * exception handling   
-* authentication    
-* connect more than 1 api  
+* authentication with OAuth2    
+* connect more api than only USGS api  
 * convert to microservices  
 * some kafka integration  
 * some redis integration  
+
+--- 
