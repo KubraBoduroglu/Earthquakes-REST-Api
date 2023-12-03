@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.kubraboduroglu.projects</groupId>
 	<artifactId>earthquakes</artifactId>
-	<version>0.2</version>
+	<version>0.3</version>
 	<name>earthquakes</name>
 	<description>earthquakes api</description>
 	<properties>

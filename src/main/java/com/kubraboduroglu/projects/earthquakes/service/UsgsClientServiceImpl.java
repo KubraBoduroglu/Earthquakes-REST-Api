@@ -85,7 +85,6 @@ public class UsgsClientServiceImpl implements UsgsClientService{
 		paramMap.put("endtime", endTime);
 		paramMap.put("minMagnitude", minMagnitude);
 		paramMap.put("format", format);
-		// ResponseEntity<UsgsResponseDTO> usgsData;
 		usgsData = restTemplate.getForEntity(USGS_QUERY_URL, String.class, paramMap);
 		// with getForObject:
 		// UsgsResponseDTO usgsResponseData;
