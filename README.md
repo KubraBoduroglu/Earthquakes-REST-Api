@@ -22,14 +22,10 @@ You can reach the OpenApi page by `http://localhost:8080/swagger-ui/index.html` 
 - Java 17  
 - Spring Boot 3.0  
 - Open API Documentation  
-- Spring Data JPA
-[]( - H2 In Memory Database)  
+- Spring Data JPA 
 - Restful API  
-- Maven
-[]( - Junit5)  
-[]( - Mockito)
-- Docker
-[]( - Github Actions)  
+- Maven 
+- Docker   
 
 
 ## Prerequisites
