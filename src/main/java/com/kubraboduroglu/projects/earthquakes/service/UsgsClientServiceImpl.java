@@ -118,11 +118,6 @@ public class UsgsClientServiceImpl implements UsgsClientService{
 		
 	}
 	
-	//for post 
-	/* paramMap.put("starttime", usgsQueryReqDto.getStarttime());
-	paramMap.put("endtime", usgsQueryReqDto.getEndtime());
-	paramMap.put("minMagnitude", usgsQueryReqDto.getMinmagnitude()); 
-	*/
 	
 	
 }
