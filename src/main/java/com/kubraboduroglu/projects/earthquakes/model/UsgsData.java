@@ -1,29 +1,37 @@
 package com.kubraboduroglu.projects.earthquakes.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class UsgsData {
 
-
 	@Id
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="USGS_ID")
+	private Long usgsId;
 	
+	@Column(name="START_TIME")
 	private String startTime;
 	
+	@Column(name="END_TIME")
 	private String endTime;
 	
+	@Column(name="MAGNITUDE")
 	private Integer magnitude;
 	
+	@Column(name="PLACE")
 	private String place;
 
-	public Long getId() {
-		return id;
+	public Long getUsgsId() {
+		return usgsId;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setUsgsId(Long usgsId) {
+		this.usgsId = usgsId;
 	}
 
 	public String getStartTime() {
@@ -57,4 +65,12 @@ public class UsgsData {
 	public void setPlace(String place) {
 		this.place = place;
 	}
+
+	@Override
+	public String toString() {
+		return "UsgsData [usgsId=" + usgsId + ", startTime=" + startTime + ", endTime=" + endTime + ", magnitude="
+				+ magnitude + ", place=" + place + "]";
+	}
+	
+	
 }
