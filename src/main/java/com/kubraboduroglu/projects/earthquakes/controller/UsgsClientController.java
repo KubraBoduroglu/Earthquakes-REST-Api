@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,8 @@ import reactor.core.publisher.Mono;
 @RestController
 @RequestMapping("/UsgsClient")
 public class UsgsClientController {
+	
+	Logger logger = LoggerFactory.getLogger(UsgsClientController.class);
 	
 	@Autowired
 	private UsgsClientService earthquakesService;
@@ -61,12 +65,14 @@ public class UsgsClientController {
 	// TODO can try feign client too
 	@GetMapping("/getCountWithWebClient")
 	public ResponseEntity<ResponseEntity<String>> getCountWithWebClient(String startTime, String endTime, Integer minMagnitude){
+		logger.info("INFO Message: logger.info(\"INFO Message: getUsgsDatav2 method called\"); method called");
 		ResponseEntity<String> count = earthquakesService.getCountWithWebClient(startTime,endTime);
 		return new ResponseEntity<>(count, HttpStatus.OK);
 	}
 	
 	@GetMapping("/getUsgsData/v1")
 	public ResponseEntity<String> getUsgsData(@RequestParam String startTime, @RequestParam String endTime, @RequestParam Double minMagnitude){
+		logger.info("INFO Message: getUsgsData method called");
 		ResponseEntity<String> usgsData = earthquakesService.getUsgsData(startTime,endTime, minMagnitude);
 		return usgsData;	
 	}
@@ -74,10 +80,9 @@ public class UsgsClientController {
 	 @GetMapping("/getUsgsData/v2")
 	 // TODO can try with List<Features> 
 	public UsgsResponseDTO getUsgsDatav2(@RequestParam String startTime, @RequestParam String endTime, @RequestParam Double minMagnitude) {
+		logger.info("INFO Message: getUsgsDatav2 method called");
 		UsgsResponseDTO usgsResponseDTO = earthquakesService.getUsgsDatav2(startTime,endTime, minMagnitude);
 		return usgsResponseDTO;
 	} 
-	
-	// post with @RequestBody UsgsQueryReqDTO usgsQueryReqDto
 	
 }
