@@ -1,25 +1,14 @@
 package com.kubraboduroglu.projects.earthquakes.service;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kubraboduroglu.projects.earthquakes.dto.UsgsQueryReqDTO;
 import com.kubraboduroglu.projects.earthquakes.dto.UsgsResponseDTO;
-
-import reactor.core.publisher.Mono;
 
 @Service
 public class UsgsClientServiceImpl implements UsgsClientService{
@@ -95,7 +84,7 @@ public class UsgsClientServiceImpl implements UsgsClientService{
 	
 	@Override
 	// List<UsgsResponseDTO>
-	public UsgsResponseDTO getUsgsDatav2(String startTime, String endTime, Double minMagnitude) {
+	public UsgsResponseDTO getUsgsDatav2(String startTime, String endTime, Integer minMagnitude) {
 		paramMap.put("starttime", startTime);
 		paramMap.put("endtime", endTime);
 		paramMap.put("minMagnitude", minMagnitude);

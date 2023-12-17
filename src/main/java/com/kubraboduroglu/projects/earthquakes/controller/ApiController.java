@@ -1,5 +1,7 @@
 package com.kubraboduroglu.projects.earthquakes.controller;
 
+import com.kubraboduroglu.projects.earthquakes.dto.UsgsResponseDTO;
+import com.kubraboduroglu.projects.earthquakes.service.ApiService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,17 +22,22 @@ public class ApiController {
 	Logger logger = LoggerFactory.getLogger(ApiController.class);
 	
 	@Autowired
-	ApiService apiService;
+	private ApiService apiService;
 	
 	@GetMapping("/allData")
-	public ResponseEntity<String> getData(){
+	public ResponseEntity<String> getAllData(){
 		return new ResponseEntity<String>("allData", HttpStatus.OK);		
+	}
+
+	@GetMapping("/Datas")
+	public ResponseEntity<String> getData(){
+		return new ResponseEntity<String>("Data", HttpStatus.OK);
 	}
 	
 	@PostMapping("/Data")
 	public ResponseEntity<String> createData(@RequestBody UsgsQueryReqDTO usgsQueryReqDto){
-		logger.info("INFO Message: createData method called");
-		String data = apiService.createData(usgsQueryReqDto);
+		logger.info("INFO Message: ApiController.createData method called");
+		UsgsResponseDTO data = apiService.createData(usgsQueryReqDto);
 		return new ResponseEntity<String>("Data", HttpStatus.OK);	
 	}
 
