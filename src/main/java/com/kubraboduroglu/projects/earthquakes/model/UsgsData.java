@@ -12,7 +12,7 @@ public class UsgsData {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="USGS_ID")
-	private Long usgsId;
+	private Long usgsDataId;
 	
 	@Column(name="START_TIME")
 	private String startTime;
@@ -26,12 +26,12 @@ public class UsgsData {
 	@Column(name="PLACE")
 	private String place;
 
-	public Long getUsgsId() {
-		return usgsId;
+	public Long getUsgsDataId() {
+		return usgsDataId;
 	}
 
-	public void setUsgsId(Long usgsId) {
-		this.usgsId = usgsId;
+	public void setUsgsDataId(Long usgsDataId) {
+		this.usgsDataId = usgsDataId;
 	}
 
 	public String getStartTime() {
@@ -68,7 +68,7 @@ public class UsgsData {
 
 	@Override
 	public String toString() {
-		return "UsgsData [usgsId=" + usgsId + ", startTime=" + startTime + ", endTime=" + endTime + ", magnitude="
+		return "UsgsData [usgsId=" + usgsDataId + ", startTime=" + startTime + ", endTime=" + endTime + ", magnitude="
 				+ magnitude + ", place=" + place + "]";
 	}
 	

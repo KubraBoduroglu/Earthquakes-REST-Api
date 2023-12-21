@@ -79,7 +79,7 @@ public class UsgsClientController {
 	
 	 @GetMapping("/getUsgsData/v2")
 	 // TODO can try with List<Features> 
-	public UsgsResponseDTO getUsgsDatav2(@RequestParam String startTime, @RequestParam String endTime, @RequestParam Double minMagnitude) {
+	public UsgsResponseDTO getUsgsDatav2(@RequestParam String startTime, @RequestParam String endTime, @RequestParam Integer minMagnitude) {
 		logger.info("INFO Message: getUsgsDatav2 method called");
 		UsgsResponseDTO usgsResponseDTO = earthquakesService.getUsgsDatav2(startTime,endTime, minMagnitude);
 		return usgsResponseDTO;
