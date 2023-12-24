@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.kubraboduroglu.projects.earthquakes.dto.Feature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,14 @@ public class UsgsClientController {
 		logger.info("INFO Message: getUsgsDatav2 method called");
 		UsgsResponseDTO usgsResponseDTO = earthquakesService.getUsgsDatav2(startTime,endTime, minMagnitude);
 		return usgsResponseDTO;
-	} 
-	
+	}
+
+	@GetMapping("/getUsgsDataByEventId")
+	public Feature getUsgsDataByEventId(@RequestParam String startTime, @RequestParam String endTime, @RequestParam String eventId) {
+		// TODO add optional parameters like place and magnitude
+		logger.info("INFO Message: getUsgsDatav2 method called");
+		Feature feature = earthquakesService.getUsgsDataByEventId(startTime,endTime, eventId);
+		return feature;
+	}
+
 }

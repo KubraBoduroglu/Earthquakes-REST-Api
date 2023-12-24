@@ -39,13 +39,13 @@ public class ApiController {
 	}
 
 	@PostMapping("/data")
-	public ResponseEntity<UsgsData> createData(@RequestBody UsgsData usgsData){
+	public ResponseEntity<UsgsData> createData(@RequestBody UsgsQueryReqDTO usgsQueryReqDTO){
 		logger.info("INFO Message: ApiController.createData method called");
-		UsgsData createdData = apiService.createData(usgsData);
+		UsgsData createdData = apiService.createData(usgsQueryReqDTO);
 		return new ResponseEntity<>(createdData, HttpStatus.CREATED);
 	}
 
-	@PutMapping("/{usgsDataId}")
+	@PutMapping("/data/{usgsDataId}")
 	public  ResponseEntity<UsgsData> updateUsgsData(@PathVariable Long usgsDataId, @RequestBody UsgsData usgsData){
 		UsgsData updatedUsgsData = apiService.updateUsgsData(usgsDataId, usgsData);
 		if (updatedUsgsData != null) {
@@ -55,7 +55,7 @@ public class ApiController {
 		}
 	}
 
-	@DeleteMapping("/{meetingId}")
+	@DeleteMapping("/data/{usgsDataId}")
 	public ResponseEntity<Void> deleteUsgsData(@PathVariable Long usgsDataId){
 		// TODO if succesfull
 		apiService.deleteUsgsData(usgsDataId);

@@ -6,9 +6,10 @@ public class UsgsQueryReqDTO {
 	private String endtime;
 	private Integer minmagnitude;
 	private Integer maxmagnitude;
+	private String eventId;
 	//private String format = "geojson";
 	
-	public UsgsQueryReqDTO(String starttime, String endtime, Integer minmagnitude, Integer maxmagnitude/*,
+	public UsgsQueryReqDTO(String starttime, String endtime, Integer minmagnitude, Integer maxmagnitude, String eventId/*,
 			String format*/) {
 		super();
 		this.starttime = starttime;
@@ -16,7 +17,8 @@ public class UsgsQueryReqDTO {
 		this.minmagnitude = minmagnitude;
 		this.maxmagnitude = maxmagnitude;
 		//this.format = format;
-	}
+        this.eventId = eventId;
+    }
 
 	public UsgsQueryReqDTO() {
 		super();
@@ -52,6 +54,14 @@ public class UsgsQueryReqDTO {
 
 	public void setMaxmagnitude(Integer maxmagnitude) {
 		this.maxmagnitude = maxmagnitude;
+	}
+
+	public String getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
 	}
 
 	/*public String getFormat() {

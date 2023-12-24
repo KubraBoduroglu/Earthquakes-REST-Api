@@ -13,6 +13,9 @@ public class UsgsData {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="USGS_ID")
 	private Long usgsDataId;
+
+	@Column(name="EVENT_ID")
+	private  String eventId;
 	
 	@Column(name="START_TIME")
 	private String startTime;
@@ -71,6 +74,13 @@ public class UsgsData {
 		return "UsgsData [usgsId=" + usgsDataId + ", startTime=" + startTime + ", endTime=" + endTime + ", magnitude="
 				+ magnitude + ", place=" + place + "]";
 	}
-	
-	
+
+
+	public String getEventId() {
+		return eventId;
+	}
+
+	public void setEventId(String eventId) {
+		this.eventId = eventId;
+	}
 }

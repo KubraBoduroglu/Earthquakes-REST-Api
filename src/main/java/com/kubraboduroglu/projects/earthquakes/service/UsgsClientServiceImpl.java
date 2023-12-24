@@ -3,6 +3,7 @@ package com.kubraboduroglu.projects.earthquakes.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.kubraboduroglu.projects.earthquakes.dto.Feature;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -89,24 +90,28 @@ public class UsgsClientServiceImpl implements UsgsClientService{
 		paramMap.put("endtime", endTime);
 		paramMap.put("minMagnitude", minMagnitude);
 		paramMap.put("format", format); 
-		
-		/*ResponseEntity<UsgsResponseDTO[]> usgsResponseData;
-		usgsResponseData = restTemplate.getForEntity(USGS_QUERY_URL, UsgsResponseDTO[].class, paramMap);
-		UsgsResponseDTO[] objects = usgsResponseData.getBody();
-		*/
+
 		ResponseEntity<UsgsResponseDTO> usgsResponseData;
 		usgsResponseData = restTemplate.getForEntity(USGS_QUERY_URL, UsgsResponseDTO.class, paramMap);
 		
 		return usgsResponseData.getBody();
-				//Arrays.asList(objects);
 		//ObjectMapper mapper = new ObjectMapper();
 		//usgsData = mapper.readValue(USGS_QUERY_URL, ParameterizedTypeReference<List<E>>);
 		//usgsResponseData = mapper.readValue(USGS_QUERY_URL, UsgsResponseDTO.class);
 		//usgsResponseData.usgsResponseData.getBody();
-		
-		
+
 	}
-	
-	
-	
+
+	@Override
+	public Feature getUsgsDataByEventId(String startTime, String endTime, String eventId) {
+		paramMap.put("starttime", startTime);
+		paramMap.put("endtime", endTime);
+		paramMap.put("eventId", eventId);
+		paramMap.put("format", format);
+		ResponseEntity<Feature> usgsResponseFeature;
+		usgsResponseFeature = restTemplate.getForEntity(USGS_QUERY_URL, Feature.class, paramMap);
+		return usgsResponseFeature.getBody();
+	}
+
+
 }
