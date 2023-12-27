@@ -40,23 +40,23 @@ public class ApiServiceImpl implements ApiService{
 		paramMap.put("format", format);
 		logger.info("INFO Message: ApiServiceImpl.createData method calling");
 		// TODO what is the return type to query with eventId -> Feature
-		ResponseEntity<Feature> feature = restTemplate.getForEntity(CLIENT_API_URL, Feature.class, paramMap);
+		Feature feature = restTemplate.getForEntity(CLIENT_API_URL, Feature.class, paramMap).getBody();
 		logger.info("INFO Message: ApiServiceImpl.createData method called");
 
-		// TODO add validate method
-		/* TODO
-		 expect 1 Feature from usgsResponseDTO now (if not map usgsResponseDTO's List<Features> to list using stream)
-		 find if there is a Feature with the same eventId
-		 dont add if there is any data with same eventId, add if there is no same data
-		 */
-//		Integer magnitude = usgsData.getMagnitude();
-//		String place = usgsData.getPlace();
-
-		UsgsData usgsData = new UsgsData();
-		usgsData.setEventId(feature.getBody().getId());
-		//TODO usgsData.setMagnitude(feature.getBody().getProperties().get);
-		return usgsDataRepository.save(usgsData);
-	}
+		List<UsgsData> existingDataList = usgsDataRepository.findByEventId(feature.getId());
+		if (!existingDataList.isEmpty()) {
+            throw new RuntimeException("There is a record with the same eventId.");
+        } else {
+            UsgsData usgsData = new UsgsData();
+            usgsData.setEventId(feature.getId());
+			// TODO how to do that with JsonNode
+			// usgsData.setMagnitude(feature.getProperties().getMag());
+			usgsData.setMagnitude(feature.getProperties().get("mag").asInt());
+			usgsData.setPlace(feature.getProperties().get("place").asText());
+			usgsData.setTime(feature.getProperties().get("time").asText());
+            return usgsDataRepository.save(usgsData);
+        }
+    }
 
 	@Override
 	public List<UsgsData> getAllUsgsData() {

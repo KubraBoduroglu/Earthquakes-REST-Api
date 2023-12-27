@@ -16,12 +16,22 @@ public class UsgsData {
 
 	@Column(name="EVENT_ID")
 	private  String eventId;
-	
+
 	@Column(name="START_TIME")
-	private String startTime;
-	
-	@Column(name="END_TIME")
-	private String endTime;
+	private String time;
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+	//	@Column(name="START_TIME")
+//	private String startTime;
+//
+//	@Column(name="END_TIME")
+//	private String endTime;
 	
 	@Column(name="MAGNITUDE")
 	private Integer magnitude;
@@ -37,21 +47,21 @@ public class UsgsData {
 		this.usgsDataId = usgsDataId;
 	}
 
-	public String getStartTime() {
-		return startTime;
-	}
-
-	public void setStartTime(String startTime) {
-		this.startTime = startTime;
-	}
-
-	public String getEndTime() {
-		return endTime;
-	}
-
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
-	}
+//	public String getStartTime() {
+//		return startTime;
+//	}
+//
+//	public void setStartTime(String startTime) {
+//		this.startTime = startTime;
+//	}
+//
+//	public String getEndTime() {
+//		return endTime;
+//	}
+//
+//	public void setEndTime(String endTime) {
+//		this.endTime = endTime;
+//	}
 
 	public Integer getMagnitude() {
 		return magnitude;
@@ -71,7 +81,7 @@ public class UsgsData {
 
 	@Override
 	public String toString() {
-		return "UsgsData [usgsId=" + usgsDataId + ", startTime=" + startTime + ", endTime=" + endTime + ", magnitude="
+		return "UsgsData [usgsId=" + usgsDataId + ", time=" + time + ", magnitude="
 				+ magnitude + ", place=" + place + "]";
 	}
 
